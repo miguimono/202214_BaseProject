@@ -1,8 +1,8 @@
-import { AerolineaEntity } from '../aerolinea/aerolinea.entity';
+import { AirlineEntity } from '../airline/airline.entity';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class AeropuertoEntity {
+export class AirportEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -18,6 +18,6 @@ export class AeropuertoEntity {
   @Column()
   ciudad: string;
 
-  @ManyToOne(() => AerolineaEntity, (aerolinea) => aerolinea.aeropuertos)
-  aerolinea: AerolineaEntity;
+  @ManyToOne(() => AirlineEntity, (airline) => airline.airports)
+  airline: AirlineEntity;
 }

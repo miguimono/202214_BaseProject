@@ -1,17 +1,17 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AerolineaModule } from './aerolinea/aerolinea.module';
-import { AeropuertoModule } from './aeropuerto/aeropuerto.module';
+import { AirlineModule } from './airline/airline.module';
+import { AirportModule } from './airport/airport.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AeropuertoEntity } from './aeropuerto/aeropuerto.entity';
-import { AerolineaEntity } from './aerolinea/aerolinea.entity';
-import { AerolineaAeropuertoModule } from './aerolinea-aeropuerto/aerolinea-aeropuerto.module';
+import { AirportEntity } from './airport/airport.entity';
+import { AirlineEntity } from './airline/airline.entity';
+import { AirlineAirportModule } from './airline-airport/airline-airport.module';
 
 @Module({
   imports: [
-    AerolineaModule,
-    AeropuertoModule,
+    AirlineModule,
+    AirportModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
@@ -19,12 +19,12 @@ import { AerolineaAeropuertoModule } from './aerolinea-aeropuerto/aerolinea-aero
       username: 'postgres',
       password: 'postgres',
       database: 'parcial1',
-      entities: [AeropuertoEntity, AerolineaEntity],
+      entities: [AirportEntity, AirlineEntity],
       dropSchema: true,
       synchronize: true,
       keepConnectionAlive: true,
     }),
-    AerolineaAeropuertoModule,
+    AirlineAirportModule,
   ],
   controllers: [AppController],
   providers: [AppService],

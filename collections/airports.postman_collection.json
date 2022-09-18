@@ -1,0 +1,610 @@
+{
+	"info": {
+		"_postman_id": "63273dd6-07fa-49c9-8035-f725fe0974e5",
+		"name": "Airports",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15039710"
+	},
+	"item": [
+		{
+			"name": "Add an airport",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()",
+							"pm.globals.set(\"airport_id\", data.id);",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"   pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"nombre\": \"El Dorado\",\n   \"codigoIATA\": \"BOG\",\n   \"pais\": \"Colombia\",\n   \"ciudad\": \"Bogota\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/airports",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"airports"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add an airport",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"nombre\": \"El Dorado\",\n   \"codigoIATA\": \"BOG\",\n   \"pais\": \"Colombia\",\n   \"ciudad\": \"Bogota\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/airports",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"airports"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"nombre\": \"El Dorado\",\n    \"codigoIATA\": \"BOG\",\n    \"pais\": \"Colombia\",\n    \"ciudad\": \"Bogota\",\n    \"id\": \"d46eb55a-e825-48a4-a0c9-13569bc62b78\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Add an invalid airport",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"   pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"El Dorado\",\n    \"codigoIATA\": \"BOG\",\n    \"pais\": \"Colombia\",\n    \"ciudad\": 123\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/airports/",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"airports",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add an invalid airport",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"El Dorado\",\n    \"codigoIATA\": \"BOG\",\n    \"pais\": \"Colombia\",\n    \"ciudad\": 123\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/airports/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"airports",
+								""
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 400,\n    \"message\": [\n        \"ciudad must be a string\"\n    ],\n    \"error\": \"Bad Request\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get all airports",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Number of airports> ' + 0, function () {",
+							"   var data = pm.response.json()",
+							"   pm.expect(data.length).to.greaterThan(0)",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/airports",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"airports"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get all airports",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/airports",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"airports"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": \"d46eb55a-e825-48a4-a0c9-13569bc62b78\",\n        \"nombre\": \"El Dorado\",\n        \"codigoIATA\": \"BOG\",\n        \"pais\": \"Colombia\",\n        \"ciudad\": \"Bogota\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Get an airport by Id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/airports/{{airport_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"airports",
+						"{{airport_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get an airport by Id",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/airports/{{airport_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"airports",
+								"{{airport_id}}"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": \"d46eb55a-e825-48a4-a0c9-13569bc62b78\",\n        \"nombre\": \"El Dorado\",\n        \"codigoIATA\": \"BOG\",\n        \"pais\": \"Colombia\",\n        \"ciudad\": \"Bogota\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Get an airline that  does not exists",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"The airport with the given id was not found\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/airports/d46eb55a-e825-48a4-a0c9-13569bc62c56",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"airports",
+						"d46eb55a-e825-48a4-a0c9-13569bc62c56"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get an airline that  does not exists",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/airports/d46eb55a-e825-48a4-a0c9-13569bc62c56",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"airports",
+								"d46eb55a-e825-48a4-a0c9-13569bc62c56"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The airport with the given id was not found\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete airport by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"   pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/airports/{{airport_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"airports",
+						"{{airport_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete airport by id",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/airports/5a57102e-e2f7-41ac-9058-b3d9700ecc27",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"airports",
+								"5a57102e-e2f7-41ac-9058-b3d9700ecc27"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Delete an invalid airport",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"The airport with the given id was not found\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/airports/933b7ab8-0695-4b7c-be10-1ddf28fec111",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"airports",
+						"933b7ab8-0695-4b7c-be10-1ddf28fec111"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete an invalid airport",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/airports/933b7ab8-0695-4b7c-be10-1ddf28fec111",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"airports",
+								"933b7ab8-0695-4b7c-be10-1ddf28fec111"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The airport with the given id was not found\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Update airport",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"El Dorado updated\",\n    \"codigoIATA\": \"BOG\",\n    \"pais\": \"Colombia\",\n    \"ciudad\": \"Bogota\",\n    \"id\": \"ac6e7965-6cd7-4052-92c1-829a9c83b8ed\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/airports/{{airport_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"airports",
+						"{{airport_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update airport",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"El Dorado updated\",\n    \"codigoIATA\": \"BOG\",\n    \"pais\": \"Colombia\",\n    \"ciudad\": \"Bogota\",\n    \"id\": \"ac6e7965-6cd7-4052-92c1-829a9c83b8ed\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/airports/{{airport_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"airports",
+								"{{airport_id}}"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"id\": \"ac6e7965-6cd7-4052-92c1-829a9c83b8ed\",\n    \"nombre\": \"El Dorado updated\",\n    \"codigoIATA\": \"BOG\",\n    \"pais\": \"Colombia\",\n    \"ciudad\": \"Bogota\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Update airport that does not exists",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"The airport with the given id was not found\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"El Dorado updated\",\n    \"codigoIATA\": \"BOG\",\n    \"pais\": \"Colombia\",\n    \"ciudad\": \"Bogota\",\n    \"id\": \"ac6e7965-6cd7-4052-92c1-829a9c83b8ed\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/airports/ac6e7965-6cd7-4052-92c1-829a9c83b8aa",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"airports",
+						"ac6e7965-6cd7-4052-92c1-829a9c83b8aa"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update airport that does not exists",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"El Dorado updated\",\n    \"codigoIATA\": \"BOG\",\n    \"pais\": \"Colombia\",\n    \"ciudad\": \"Bogota\",\n    \"id\": \"ac6e7965-6cd7-4052-92c1-829a9c83b8ed\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/airports/ac6e7965-6cd7-4052-92c1-829a9c83b8aa",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"airports",
+								"ac6e7965-6cd7-4052-92c1-829a9c83b8aa"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The airport with the given id was not found\"\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000/api/v1",
+			"type": "string"
+		},
+		{
+			"value": "",
+			"type": "string",
+			"disabled": true
+		}
+	]
+}

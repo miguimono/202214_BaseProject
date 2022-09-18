@@ -32,10 +32,7 @@ export class AirlineController {
 
   @Post()
   async create(@Body() airlineDto: AirlineDto) {
-    const airline: AirlineEntity = plainToInstance(
-      AirlineEntity,
-      airlineDto,
-    );
+    const airline: AirlineEntity = plainToInstance(AirlineEntity, airlineDto);
     return await this.airlineService.create(airline);
   }
 
@@ -44,10 +41,7 @@ export class AirlineController {
     @Param('airlineId') airlineId: string,
     @Body() airlineDto: AirlineDto,
   ) {
-    const airline: AirlineEntity = plainToInstance(
-      AirlineEntity,
-      airlineDto,
-    );
+    const airline: AirlineEntity = plainToInstance(AirlineEntity, airlineDto);
     return await this.airlineService.update(airlineId, airline);
   }
 

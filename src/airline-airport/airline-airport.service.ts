@@ -115,10 +115,7 @@ export class AirlineAirportService {
         BusinessError.PRECONDITION_FAILED,
       );
 
-    return await this.airportRepository.save({
-      ...airlineAirport,
-      ...airport,
-    });
+    return await this.airportRepository.save({ ...airlineAirport, ...airport });
   }
 
   async findAirportsFromAirline(airlineId: string): Promise<AirportEntity[]> {

@@ -1,0 +1,595 @@
+{
+	"info": {
+		"_postman_id": "f6af8b42-2814-460e-9ad7-eb56fee30447",
+		"name": "Airlines",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15039710"
+	},
+	"item": [
+		{
+			"name": "Add an airline",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()",
+							"pm.globals.set(\"airline_id\", data.id);",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"   pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"nombre\": \"Avianca\",\n   \"descripcion\": \"The largest Colombian airline.\",\n   \"fechaFundacion\": \"2013-10-21T13:28:06.419Z\",\n   \"paginaWeb\": \"https://www.avianca.com/mx/es/?gclid=CjwKCAjw4JWZBhApEiwAtJUN0Pu9VWA41BUgX3xmuqukaV1VPhhr9w2lY7ADRQsDjcz3YEbJunXmmhoCr-8QAvD_BwE\",\n   \"airports\":[]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/airlines",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"airlines"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add an airline",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/airlines",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"airlines"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n   \"id\": \"48a9ab90-1276-11ed-861d-0242ac120002\",\n   \"nombre\": \"Avianca\",\n   \"descripcion\": \"The largest Colombian airline.\",\n   \"fechaFundacion\": \"2013-10-21T13:28:06.419Z\",\n   \"paginaWeb\": \"https://www.avianca.com/mx/es/?gclid=CjwKCAjw4JWZBhApEiwAtJUN0Pu9VWA41BUgX3xmuqukaV1VPhhr9w2lY7ADRQsDjcz3YEbJunXmmhoCr-8QAvD_BwE\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Add an invalid airline",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"   pm.response.to.have.status(400);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"id\": \"48a9ab90-1276-11ed-861d-0242ac120002\",\n   \"nombre\": \"Avianca\",\n   \"descripcion\": \"The largest Colombian airline.\",\n   \"fechaFundacion\": 1234234,\n   \"paginaWeb\": \"https://www.avianca.com/mx/es/?gclid=CjwKCAjw4JWZBhApEiwAtJUN0Pu9VWA41BUgX3xmuqukaV1VPhhr9w2lY7ADRQsDjcz3YEbJunXmmhoCr-8QAvD_BwE\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/airlines",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"airlines"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add an invalid airline",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"id\": \"48a9ab90-1276-11ed-861d-0242ac120002\",\n   \"nombre\": \"Avianca\",\n   \"descripcion\": \"The largest Colombian airline.\",\n   \"fechaFundacion\": 1234234,\n   \"paginaWeb\": \"https://www.avianca.com/mx/es/?gclid=CjwKCAjw4JWZBhApEiwAtJUN0Pu9VWA41BUgX3xmuqukaV1VPhhr9w2lY7ADRQsDjcz3YEbJunXmmhoCr-8QAvD_BwE\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/airlines",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"airlines"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n   \"id\": \"48a9ab90-1276-11ed-861d-0242ac120002\",\n   \"nombre\": \"Avianca\",\n   \"descripcion\": \"The largest Colombian airline.\",\n   \"fechaFundacion\": 1234234,\n   \"paginaWeb\": \"https://www.avianca.com/mx/es/?gclid=CjwKCAjw4JWZBhApEiwAtJUN0Pu9VWA41BUgX3xmuqukaV1VPhhr9w2lY7ADRQsDjcz3YEbJunXmmhoCr-8QAvD_BwE\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get all airlines",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Number of airlines> ' + 0, function () {",
+							"   var data = pm.response.json()",
+							"   pm.expect(data.length).to.greaterThan(0)",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/airlines",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"airlines"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get all airlines",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/airlines",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"airlines"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": \"48a9ab90-1276-11ed-861d-0242ac120002\",\n        \"nombre\": \"Avianca\",\n        \"descripcion\": \"The largest Colombian airline.\",\n        \"fechaFundacion\": \"2013-10-21T13:28:06.419Z\",\n        \"paginaWeb\": \"https://www.avianca.com/mx/es/?gclid=CjwKCAjw4JWZBhApEiwAtJUN0Pu9VWA41BUgX3xmuqukaV1VPhhr9w2lY7ADRQsDjcz3YEbJunXmmhoCr-8QAvD_BwE\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Get airline by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/airlines/{{airline_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"airlines",
+						"{{airline_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get airline by id",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/airlines/{{airline_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"airlines",
+								"{{airline_id}}"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"id\": \"8fed1693-b572-4638-a1bb-71216ac23e26\",\n    \"nombre\": \"Avianca\",\n    \"descripcion\": \"The largest Colombian airline.\",\n    \"fechaFundacion\": \"2013-10-21T13:28:06.419Z\",\n    \"paginaWeb\": \"https://www.avianca.com/mx/es/?gclid=CjwKCAjw4JWZBhApEiwAtJUN0Pu9VWA41BUgX3xmuqukaV1VPhhr9w2lY7ADRQsDjcz3YEbJunXmmhoCr-8QAvD_BwE\",\n    \"airports\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "Get an airline that does not exists",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"The airline with the given id was not found\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/airlines/8fed1693-b572-4638-a1bb-71216ac23e56",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"airlines",
+						"8fed1693-b572-4638-a1bb-71216ac23e56"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get an airline that does not exists",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/airlines/8fed1693-b572-4638-a1bb-71216ac23e56",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"airlines",
+								"8fed1693-b572-4638-a1bb-71216ac23e56"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The airline with the given id was not found\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete airline by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"   pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/airlines/{{airline_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"airlines",
+						"{{airline_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete airline by id",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/airlines/{{airline_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"airlines",
+								"{{airline_id}}"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Delete an invalid airline",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"The airline with the given id was not found\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/airlines/8fed1693-b572-4638-a1bb-71216ac23e56",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"airlines",
+						"8fed1693-b572-4638-a1bb-71216ac23e56"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete an invalid airline",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/airlines/8fed1693-b572-4638-a1bb-71216ac23e56",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"airlines",
+								"8fed1693-b572-4638-a1bb-71216ac23e56"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The airline with the given id was not found\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Update airline",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"nombre\": \"Avianca Updated\",\n   \"descripcion\": \"The largest Colombian airline.\",\n   \"fechaFundacion\": \"2013-10-21T13:28:06.419Z\",\n   \"paginaWeb\": \"https://www.avianca.com/mx/es/?gclid=CjwKCAjw4JWZBhApEiwAtJUN0Pu9VWA41BUgX3xmuqukaV1VPhhr9w2lY7ADRQsDjcz3YEbJunXmmhoCr-8QAvD_BwE\",\n   \"airports\":[]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/airlines/{{airline_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"airlines",
+						"{{airline_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update airline",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"nombre\": \"Avianca Updated\",\n   \"descripcion\": \"The largest Colombian airline.\",\n   \"fechaFundacion\": \"2013-10-21T13:28:06.419Z\",\n   \"paginaWeb\": \"https://www.avianca.com/mx/es/?gclid=CjwKCAjw4JWZBhApEiwAtJUN0Pu9VWA41BUgX3xmuqukaV1VPhhr9w2lY7ADRQsDjcz3YEbJunXmmhoCr-8QAvD_BwE\",\n   \"airports\":[]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/airlines/{{airline_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"airlines",
+								"{{airline_id}}"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"id\": \"0f0adfd6-7027-4bb1-82b6-fae6b305d153\",\n    \"nombre\": \"Avianca Updated\",\n    \"descripcion\": \"The largest Colombian airline.\",\n    \"fechaFundacion\": \"2013-10-21T13:28:06.419Z\",\n    \"paginaWeb\": \"https://www.avianca.com/mx/es/?gclid=CjwKCAjw4JWZBhApEiwAtJUN0Pu9VWA41BUgX3xmuqukaV1VPhhr9w2lY7ADRQsDjcz3YEbJunXmmhoCr-8QAvD_BwE\",\n    \"airports\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "Update airline that does not exists",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"The airline with the given id was not found\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"nombre\": \"Avianca Updated\",\n   \"descripcion\": \"The largest Colombian airline.\",\n   \"fechaFundacion\": \"2013-10-21T13:28:06.41aa\",\n   \"paginaWeb\": \"https://www.avianca.com/mx/es/?gclid=CjwKCAjw4JWZBhApEiwAtJUN0Pu9VWA41BUgX3xmuqukaV1VPhhr9w2lY7ADRQsDjcz3YEbJunXmmhoCr-8QAvD_BwE\",\n   \"airports\":[]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/airlines/ac6e7965-6cd7-4052-92c1-829a9c83b8aa",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"airlines",
+						"ac6e7965-6cd7-4052-92c1-829a9c83b8aa"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update airline that does not exists",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"nombre\": \"Avianca Updated\",\n   \"descripcion\": \"The largest Colombian airline.\",\n   \"fechaFundacion\": \"2013-10-21T13:28:06.41aa\",\n   \"paginaWeb\": \"https://www.avianca.com/mx/es/?gclid=CjwKCAjw4JWZBhApEiwAtJUN0Pu9VWA41BUgX3xmuqukaV1VPhhr9w2lY7ADRQsDjcz3YEbJunXmmhoCr-8QAvD_BwE\",\n   \"airports\":[]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/airlines/ac6e7965-6cd7-4052-92c1-829a9c83b8aa",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"airlines",
+								"ac6e7965-6cd7-4052-92c1-829a9c83b8aa"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The airline with the given id was not found\"\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000/api/v1",
+			"type": "string"
+		}
+	]
+}

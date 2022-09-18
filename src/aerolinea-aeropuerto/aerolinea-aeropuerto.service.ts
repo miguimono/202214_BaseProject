@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { AeropuertoEntity } from 'src/aeropuerto/aeropuerto.entity';
-import { AerolineaEntity } from 'src/aerolinea/aerolinea.entity';
+import { AeropuertoEntity } from '../aeropuerto/aeropuerto.entity';
+import { AerolineaEntity } from '../aerolinea/aerolinea.entity';
 import { Repository } from 'typeorm';
 import {
   BusinessError,
   BusinessLogicException,
-} from '../shared/errors/business-errors';
+} from '../shared/business-errors';
 
 @Injectable()
 export class AerolineaAeropuertoService {
@@ -32,7 +32,7 @@ export class AerolineaAeropuertoService {
 
     const aerolinea: AerolineaEntity = await this.aerolineaRepository.findOne({
       where: { id: aerolineaId },
-      relations: ['artworks', 'exhibitions'],
+      relations: ['aeropuertos'],
     });
     if (!aerolinea)
       throw new BusinessLogicException(
@@ -58,7 +58,7 @@ export class AerolineaAeropuertoService {
 
     const aerolinea: AerolineaEntity = await this.aerolineaRepository.findOne({
       where: { id: aerolineaId },
-      relations: ['aerop'],
+      relations: ['aeropuertos'],
     });
     if (!aerolinea)
       throw new BusinessLogicException(

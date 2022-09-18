@@ -1,11 +1,6 @@
-import { AeropuertoEntity } from 'src/aeropuerto/aeropuerto.entity';
-import {
-  Column,
-  Entity,
-  ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { AeropuertoEntity } from '../aeropuerto/aeropuerto.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+
 @Entity()
 export class AerolineaEntity {
   @PrimaryGeneratedColumn('uuid')
@@ -23,6 +18,6 @@ export class AerolineaEntity {
   @Column()
   paginaWeb: string;
 
-  @OneToMany(() => AeropuertoEntity, aeropuerto => aeropuerto.aerolinea)
-    aeropuertos: AeropuertoEntity[];
+  @OneToMany(() => AeropuertoEntity, (aeropuerto) => aeropuerto.aerolinea)
+  aeropuertos: AeropuertoEntity[];
 }

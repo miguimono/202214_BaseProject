@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import {
   BusinessError,
   BusinessLogicException,
-} from '../shared/errors/business-errors';
+} from '../shared/business-errors';
 import { Repository } from 'typeorm';
 import { AerolineaEntity } from './aerolinea.entity';
 
